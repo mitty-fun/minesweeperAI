@@ -10,8 +10,6 @@
 </head>
 <body oncontextmenu="return false">
     <div id="game">
-        <h1>{{getGameTime}}</h1>
-        <h2>{{getGameStatus}}</h2>
         <div class="grid">
             <div class="row" v-for="row in grid">
                 <div class="col" v-for="col in row"
@@ -22,14 +20,12 @@
                 </div>
             </div>
         </div>
-        <div>
-            width<input type="number" v-model="width">
-            <br>
-            height<input type="number" v-model="height">
-            <br>
-            bombs<input type="number" v-model="bombs">
-            <br>
-            <button @click="restart">Again</button>
+        <div class="control" v-if="isFirstTime || (game.status !== 'ready' && game.status !== 'playing')">
+            <div class="center">
+                <h1>{{getGameStatus}}</h1>
+                <h2>{{getGameTime}}</h2>
+                <button @click="restart">START</button>
+            </div>
         </div>
     </div>
     <script src="./minesweeper.js"></script>

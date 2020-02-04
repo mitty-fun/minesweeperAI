@@ -4,6 +4,7 @@ const minesweeper = new Minesweeper();
 const game = new Vue({
     el: '#game',
     data: {
+        isFirstTime: true,
         game: minesweeper,
         grid: minesweeper.grid,
         width: minesweeper.width,
@@ -13,21 +14,22 @@ const game = new Vue({
     methods: {
         mousedownLeft(col) {
             if (col.isOpen) {
-                this.game.autoOpen(col);
+                this.game.autoOpen(col)
             } else {
-                this.game.open(col);
+                this.game.open(col)
             }
         },
         
         mousedownRight(col) {
-            this.game.toggleFlag(col);
+            this.game.toggleFlag(col)
         },
         
         restart() {
-            const width = Number(this.width);
-            const height = Number(this.height);
-            const bombs = Number(this.bombs);
-            this.game.reset(width, height, bombs);
+            const width = Number(this.width)
+            const height = Number(this.height)
+            const bombs = Number(this.bombs)
+            this.game.reset(width, height, bombs)
+            this.isFirstTime = false
         },
         
         classArrayOf(col) {
@@ -43,24 +45,24 @@ const game = new Vue({
 
     computed: {
         getGameTime() {
-            let h = Math.floor(this.game.timer / 3600);
-            let m = Math.floor(this.game.timer % 3600 / 60);
-            let s = Math.floor(this.game.timer % 60);
-            if (h < 10) h = '0' + h;
-            if (m < 10) m = '0' + m;
-            if (s < 10) s = '0' + s;
-            return `${h}:${m}:${s}`;
+            let h = Math.floor(this.game.timer / 3600)
+            let m = Math.floor(this.game.timer % 3600 / 60)
+            let s = Math.floor(this.game.timer % 60)
+            if (h < 10) h = '0' + h
+            if (m < 10) m = '0' + m
+            if (s < 10) s = '0' + s
+            return `${h}:${m}:${s}`
         },
         
         getGameStatus() {
             if (this.game.status === 'ready') {
-                return 'click to start';
+                return 'click to start'
             }
             if (this.game.status === 'playing') {
-                return 'leave ' + this.game.leave;
+                return 'leave ' + this.game.leave
             }
             if (this.game.status === 'gameover') {
-                return this.game.leave === 0 ? 'You Win' : 'You Loss';
+                return this.game.leave === 0 ? 'YOU WIN' : 'YOU LOSE'
             }
         }
     }
