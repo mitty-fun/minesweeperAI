@@ -26,7 +26,7 @@ class Minesweeper {
         this.reset()
     }
 
-    reset = (width, height, bombs) => {
+    reset(width, height, bombs) {
         if (width) this.width = width
         if (height) this.height = height
         if (bombs) this.bombs = bombs
@@ -37,7 +37,7 @@ class Minesweeper {
         this.randomBomb()
     }
 
-    resetGrid = () => {
+    resetGrid() {
         this.grid.splice(0, this.grid.length)
         for (let y = 0; y < this.height; y++) {
             this.grid.push([])
@@ -47,7 +47,7 @@ class Minesweeper {
         }
     }
 
-    getColObject = (x, y) => {
+    getColObject (x, y) {
         return {
             x, y,
             isBomb: false,
@@ -60,7 +60,7 @@ class Minesweeper {
         }
     }
 
-    randomBomb = () => {
+    randomBomb() {
         let count=0
         while (count < this.bombs && count < this.width*this.height) {
             let x = Math.floor(Math.random() * this.width)
@@ -75,13 +75,13 @@ class Minesweeper {
     }
 
 
-    autoOpen = (col) => {
+    autoOpen(col) {
         const cols = this.getNeighbors(col)
         const save = cols.filter(col => col.isFlag).length
-        if (col.number == save) cols.filter(col => !col.isOpen && !col.isFlag).forEach(this.open)
+        if (col.number == save) cols.filter(col => !col.isOpen && !col.isFlag).forEach(this.open.bind(this))
     }
 
-    open = (col) => {
+    open(col) {
         if (this.status === 'ready') this.status = 'playing'
         if (col.isOpen || col.isFlag || this.status === 'gameover') return
         
@@ -90,37 +90,37 @@ class Minesweeper {
 
         if (col.isBomb || this.leave === 0) return this.gameover()
         if (!col.isBoom && col.number === 0) {
-            this.getNeighbors(col).forEach(this.open)
+            this.getNeighbors(col).forEach(this.open.bind(this))
         }
     }
 
-    toggleFlag = (col) => {
+    toggleFlag(col) {
         if (col.isOpen || this.status == 'gameover') return
         col.isFlag = !col.isFlag
     }
 
-    gameover = () => {
+    gameover() {
         this.status = 'gameover'
     }
 
-    getNeighbors = ({x, y}) => {
+    getNeighbors({x, y}) {
         return this.offsets.map((offset) => {
             return { x: x + offset.x, y: y + offset.y }
         })
-        .filter(this.isValidPos)
-        .map(this.getCol)
+        .filter(this.isValidPos.bind(this))
+        .map(this.getCol.bind(this))
     }
 
-    isValidPos = ({x, y}) => {
+    isValidPos({x, y}) {
         return x >= 0 && x < this.width &&
                y >= 0 && y < this.height
     }
 
-    getCol = ({x, y}) => {
+    getCol({x, y}) {
         return this.grid[y][x]
     }
 
-    getAllCos = () => {
+    getAllCos() {
         let arr = []
         this.grid.forEach((row) => {
             arr = arr.concat(row)
@@ -128,3 +128,5 @@ class Minesweeper {
         return arr;
     }
 }
+
+export default Minesweeper

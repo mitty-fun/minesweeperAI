@@ -1,0 +1,29 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch  --mode development",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitty-fun/minesweeperAI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitty-fun/minesweeperAI/issues"
+  },
+  "homepage": "https://github.com/mitty-fun/minesweeperAI#readme",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "vue": "^2.6.11"
+  }
+}

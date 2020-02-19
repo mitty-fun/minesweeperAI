@@ -26,7 +26,7 @@ function analytics (game) {
         return !col.isOpen && !col.isFlag && game.getNeighbors(col).some(col => col.isOpen)
     })
 
-    if (arr.length === 0) return { setFlag: [], safePlace: [game.getAllCos()[0]] }
+    if (arr.length === 0) return { setFlag: [], safePlace: [game.getAllCos().filter(col => !col.isOpen)[0]] }
 
     arr.forEach(col => {
         col.isFocus = true
@@ -65,13 +65,10 @@ function analytics (game) {
     arr.forEach((col) => {
         if (col.probability === count) setFlag.push(col)
         if (col.probability === 0) safePlace.push(col)
-        // if (col.probability === count) col.isFlag = true
-        // if (col.probability === 0) game.open(col)
     })
 
     if (arr.some((col) => col.isOpen) === false) {
         let col = arr.sort((col) => col.probability)[0]
-        // game.open(col)
         safePlace.push(col)
     }
     
@@ -118,3 +115,5 @@ function isValid (cell, game) {
     return true
 
 }
+
+export default AI

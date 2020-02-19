@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="../minesweeper/index.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body oncontextmenu="return false">
     <div id="game">
@@ -24,12 +24,10 @@
             <div class="center">
                 <h1>{{getGameStatus}}</h1>
                 <h2>{{getGameTime}}</h2>
-                <button @click="restart" onclick="AI(minesweeper)">START</button>
+                <button @click="runAI">START</button>
             </div>
         </div>
     </div>
-    <script src="../minesweeper/minesweeper.js"></script>
-    <script src="./ai.js"></script>
-    <script src="../minesweeper/index.js"></script>
+    <script src="index.bundle.js"></script>
 </body>
 </html>

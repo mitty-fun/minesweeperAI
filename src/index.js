@@ -1,15 +1,19 @@
+import Vue from 'vue'
+import Minesweeper from './minesweeper'
+import AI from './ai'
 
-const minesweeper = new Minesweeper();
 
-const game = new Vue({
+const game = new Minesweeper()
+
+new Vue({
     el: '#game',
     data: {
         isFirstTime: true,
-        game: minesweeper,
-        grid: minesweeper.grid,
-        width: minesweeper.width,
-        height: minesweeper.height,
-        bombs: minesweeper.bombs,
+        game,
+        grid: game.grid,
+        width: game.width,
+        height: game.height,
+        bombs: game.bombs,
     },
     methods: {
         mousedownLeft(col) {
@@ -41,6 +45,11 @@ const game = new Vue({
                 { isBomb: this.game.status === 'gameover' && col.isBomb },
             ]
         },
+
+        runAI () {
+            this.restart()
+            AI(this.game)
+        }
     },
 
     computed: {
@@ -66,4 +75,4 @@ const game = new Vue({
             }
         }
     }
-});
+})
